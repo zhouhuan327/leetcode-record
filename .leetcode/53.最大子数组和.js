@@ -1,59 +1,59 @@
 /*
  * @lc app=leetcode.cn id=53 lang=javascript
  *
- * [53] 最大子序和
+ * [53] 最大子数组和
  *
  * https://leetcode-cn.com/problems/maximum-subarray/description/
  *
  * algorithms
- * Easy (55.34%)
- * Likes:    4128
+ * Easy (54.95%)
+ * Likes:    4731
  * Dislikes: 0
- * Total Accepted:    788.3K
- * Total Submissions: 1.4M
+ * Total Accepted:    970.4K
+ * Total Submissions: 1.8M
  * Testcase Example:  '[-2,1,-3,4,-1,2,1,-5,4]'
  *
  * 给你一个整数数组 nums ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
- * 
+ *
  * 子数组 是数组中的一个连续部分。
- * 
- * 
- * 
+ *
+ *
+ *
  * 示例 1：
- * 
- * 
+ *
+ *
  * 输入：nums = [-2,1,-3,4,-1,2,1,-5,4]
  * 输出：6
  * 解释：连续子数组 [4,-1,2,1] 的和最大，为 6 。
- * 
- * 
+ *
+ *
  * 示例 2：
- * 
- * 
+ *
+ *
  * 输入：nums = [1]
  * 输出：1
- * 
- * 
+ *
+ *
  * 示例 3：
- * 
- * 
+ *
+ *
  * 输入：nums = [5,4,-1,7,8]
  * 输出：23
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
  * 提示：
- * 
- * 
+ *
+ *
  * 1 <= nums.length <= 10^5
  * -10^4 <= nums[i] <= 10^4
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
  * 进阶：如果你已经实现复杂度为 O(n) 的解法，尝试使用更为精妙的 分治法 求解。
- * 
+ *
  */
 
 // @lc code=start
@@ -61,17 +61,16 @@
  * @param {number[]} nums
  * @return {number}
  */
-var maxSubArray = function(nums) {
-    let res = 0;
-    for(let i = 0;i<nums.length;i++) {
-        let count = 0;
-        for(let k = i;k<nums.length;k++) {
-            count+=nums[k]
-        }
-        res = Math.max(res,count)
-        i++
-    }
-    return res
+var maxSubArray = function (nums) {
+  let max = nums[0];
+  let pre = 0;
+  for (let i = 0; i < nums.length; i++) {
+    const cur = nums[i];
+    // pre小于0就直接丢弃前边的
+    pre = Math.max(pre + cur, cur);
+    max = Math.max(pre, max);
+  }
+  return max;
 };
+maxSubArray([-2, -3]);
 // @lc code=end
-
