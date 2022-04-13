@@ -45,12 +45,23 @@
  * @return {void} Do not return anything, modify nums1 in-place instead.
  */
 var merge = function (nums1, m, nums2, n) {
-  let len = nums1.length - 1;
-  let i = m - 1; // num1的索引
-  let j = n - 1; // nums2的索引
-  while (i >= 0 && j >= 0) {
-    nums1[len--] = nums1[i] > nums2[j] ? nums1[i--] : nums2[j--];
+  let p1 = 0;
+  let p2 = 0;
+  const res = [];
+  while (p1 < m || p2 < n) {
+    if (p1 === m) {
+      res.push(nums2[p2++]);
+    } else if (p2 === n) {
+      res.push(nums1[p1++]);
+    } else if (nums1[p1] < nums2[p2]) {
+      res.push(nums1[p1++]);
+    } else {
+      res.push(nums2[p2++]);
+    }
   }
-  nums1.splice(0, j + 1, ...nums2.slice(0, j + 1));
+  res.forEach((item, index) => {
+    nums1[index] = item;
+  });
+  return nums1;
 };
 // @lc code=end
