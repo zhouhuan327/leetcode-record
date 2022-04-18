@@ -55,16 +55,12 @@
  * @return {number}
  */
 var maxProfit = function (prices) {
-  let maxProfit = 0;
+  let max = 0;
   let min = Number.MAX_VALUE;
-  for (const item of prices) {
-    if (item - min > maxProfit) {
-      maxProfit = item - min;
-    }
-    if (item < min) {
-      min = item;
-    }
+  for (const price of prices) {
+    max = Math.max(max, price - min);
+    min = Math.min(min, price);
   }
-  return maxProfit;
+  return max;
 };
 // @lc code=end
